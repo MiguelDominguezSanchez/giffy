@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 const GIFS = [
@@ -13,12 +13,18 @@ const DIFFERENT_GIFS = [
 function App() {
 	const [gifs, setGifs] = useState(GIFS);
 
+	useEffect(function () {
+		console.log('actualizando los gifs');
+		setGifs(DIFFERENT_GIFS);
+	}, []);
+
 	return (
 		<div className="App">
 			<section className="App-content">
 				{gifs.map(singleGif => (
 					<img src={singleGif} />
 				))}
+				<button onClick={() => setGifs(DIFFERENT_GIFS)}>cambiar gifs</button>
 			</section>
 		</div>
 	);
